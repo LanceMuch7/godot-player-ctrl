@@ -1,0 +1,127 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://src/Player.gd" type="Script" id=1]
+[ext_resource path="res://Gold.material" type="Material" id=2]
+[ext_resource path="res://src/UI/HUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/UI/PauseMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Characters/Health.gd" type="Script" id=6]
+[ext_resource path="res://src/Characters/Character.gd" type="Script" id=7]
+[ext_resource path="res://RefMat.material" type="Material" id=8]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.3
+height = 0.6
+
+[sub_resource type="CapsuleMesh" id=4]
+radius = 0.12
+mid_height = 0.07
+radial_segments = 16
+rings = 4
+
+[sub_resource type="CapsuleMesh" id=2]
+radius = 0.18
+mid_height = 0.3
+radial_segments = 16
+rings = 4
+
+[sub_resource type="CapsuleMesh" id=5]
+radius = 0.08
+mid_height = 0.4
+radial_segments = 16
+rings = 4
+
+[sub_resource type="CapsuleMesh" id=6]
+radius = 0.08
+mid_height = 0.4
+radial_segments = 16
+rings = 4
+
+[sub_resource type="SphereShape" id=3]
+radius = 0.3
+
+[node name="Player" type="KinematicBody"]
+collision_layer = 2
+collision_mask = 63
+script = ExtResource( 1 )
+head_path = NodePath("3DV")
+cam_path = NodePath("3DV/Cam2")
+
+[node name="HUD" parent="." instance=ExtResource( 3 )]
+
+[node name="PauseMenu" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.1, 0 )
+shape = SubResource( 1 )
+
+[node name="Character" type="Spatial" parent="."]
+script = ExtResource( 7 )
+
+[node name="Health" type="Node" parent="Character"]
+script = ExtResource( 6 )
+
+[node name="Head" type="MeshInstance" parent="Character"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.6, 0 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 2 )
+
+[node name="Body" type="MeshInstance" parent="Character"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.15, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 8 )
+
+[node name="LegL" type="MeshInstance" parent="Character"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.1, -0.4, 0 )
+mesh = SubResource( 5 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 8 )
+
+[node name="LegR" type="MeshInstance" parent="Character"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.1, -0.4, 0 )
+mesh = SubResource( 5 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 8 )
+
+[node name="ArmL" type="MeshInstance" parent="Character"]
+transform = Transform( 0.965926, -1.13133e-08, -0.258819, -0.258819, -4.2222e-08, -0.965926, 0, 1, -4.37114e-08, -0.25, 0.2, 0 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 2 )
+
+[node name="ArmR" type="MeshInstance" parent="Character"]
+transform = Transform( 0.965926, 1.13133e-08, 0.258819, 0.258819, -4.2222e-08, -0.965926, 0, 1, -4.37114e-08, 0.25, 0.2, 0 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 2 )
+
+[node name="Neck" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442157, 0 )
+visible = false
+
+[node name="Camera" type="Camera" parent="Neck"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.171813, 0 )
+near = 0.02
+far = 400.0
+
+[node name="MouseRay" type="RayCast" parent="Neck/Camera"]
+enabled = true
+cast_to = Vector3( 0, 0, -1.8 )
+collision_mask = 60
+
+[node name="3DV" type="SpringArm" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, -0.1 )
+shape = SubResource( 3 )
+spring_length = 3.0
+
+[node name="Cam2" type="Camera" parent="3DV"]
+current = true
+near = 0.02
+far = 400.0
+
+[node name="MouseRay" type="RayCast" parent="3DV/Cam2"]
+enabled = true
+cast_to = Vector3( 0, 0, -6.8 )
+collision_mask = 60

@@ -1,0 +1,129 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/Fonts/Verdanna_24.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/UI/PauseMenu.gd" type="Script" id=2]
+
+[node name="PauseMenu" type="ColorRect"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.156863, 0.156863, 0.156863, 0.392157 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cntr" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="Cntr"]
+margin_left = 412.0
+margin_top = 196.0
+margin_right = 612.0
+margin_bottom = 403.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Cntr/VBox"]
+margin_right = 200.0
+margin_bottom = 31.0
+custom_fonts/font = ExtResource( 1 )
+text = "GAME PAUSED"
+align = 1
+valign = 1
+
+[node name="Resume" type="Control" parent="Cntr/VBox"]
+margin_top = 35.0
+margin_right = 200.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 200, 40 )
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="Cntr/VBox/Resume"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -15.0
+margin_right = 100.0
+margin_bottom = 15.0
+mouse_default_cursor_shape = 2
+text = "RESUME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Save" type="Control" parent="Cntr/VBox"]
+margin_top = 79.0
+margin_right = 200.0
+margin_bottom = 119.0
+rect_min_size = Vector2( 200, 40 )
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="Cntr/VBox/Save"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -15.0
+margin_right = 100.0
+margin_bottom = 15.0
+mouse_default_cursor_shape = 2
+text = "SAVE GAME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="Control" parent="Cntr/VBox"]
+margin_top = 123.0
+margin_right = 200.0
+margin_bottom = 163.0
+rect_min_size = Vector2( 200, 40 )
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="Cntr/VBox/Options"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -15.0
+margin_right = 100.0
+margin_bottom = 15.0
+mouse_default_cursor_shape = 2
+text = "OPTIONS"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Control" parent="Cntr/VBox"]
+margin_top = 167.0
+margin_right = 200.0
+margin_bottom = 207.0
+rect_min_size = Vector2( 200, 40 )
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="Cntr/VBox/Quit"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -15.0
+margin_right = 100.0
+margin_bottom = 15.0
+mouse_default_cursor_shape = 2
+text = "QUIT TO DESKTOP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Cntr/VBox/Resume/Button" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="Cntr/VBox/Save/Button" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="Cntr/VBox/Options/Button" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="Cntr/VBox/Quit/Button" to="." method="_on_Quit_pressed"]
